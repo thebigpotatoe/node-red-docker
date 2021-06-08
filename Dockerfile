@@ -51,7 +51,7 @@ RUN apt-get update && apt-get install -y build-essential python && \
     cp -R node_modules prod_node_modules
 
 #### Stage RELEASE #####################################################################################################
-FROM base AS RELEASE
+FROM base AS release
 ARG BUILD_DATE
 ARG BUILD_VERSION
 ARG BUILD_REF
@@ -98,7 +98,7 @@ EXPOSE 1880
 ENTRYPOINT ["npm", "start", "--cache", "/data/.npm", "--", "--userDir", "/data"]
 
 #### Stage APPLICATION #####################################################################################################
-FROM RELEASE as APPLICATION
+FROM release as application
 
 # Change back to root to install deps
 USER root
